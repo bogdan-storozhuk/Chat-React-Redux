@@ -1,14 +1,9 @@
 import React, {Component} from "react";
-import ReactDOM from "react-dom";
 
 import Chat from '../chat';
 import ChatService from '../../services';
-import withChatService from '../../components/hoc-helpers/withChatService';
-import {ChatServiceProvider} from '../chat-service-context'
-import {ChatServiceConsumer} from '../chat-service-context';
 import './app.css';
-
-
+import ErrorBoundry from '../error-boundry';
 export default class App extends Component{
 
   
@@ -20,7 +15,9 @@ export default class App extends Component{
   render(){
      
     return (
+      <ErrorBoundry>
         <Chat chatService = {this.state.chatService}/>
+        </ErrorBoundry>
     );
   }
 }

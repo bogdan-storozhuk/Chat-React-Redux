@@ -7,6 +7,7 @@ import Spinner from '../spinner';
 import EditMessagePopup  from '../edit-message-popup/'
 import {fetchMessages} from '../../actions';
 import "./chat-content-panel.css";
+import ErrorIndicator  from '../error-indicator';
 
 class ChatContentPanel extends Component {
 
@@ -16,18 +17,19 @@ class ChatContentPanel extends Component {
 
 render(){
 
-   const  {loading } = this.props;
+   const  {loading, error } = this.props;
         return (<div className='ChatContentPanelWrapper'>
                    <ChatContentPanelHeader/>
-                   {!loading? <ChatContentPanelBody/> : <Spinner/>}
+                   { error? <ErrorIndicator/>:
+                    !loading? <ChatContentPanelBody/> : <Spinner/>}
                    <EditMessagePopup/>
                    <ChatContentPanelFooter  />
                </div>);
     };
 }
 
-const mapStateToProps = ({  loading}) => {
-    return {  loading, };
+const mapStateToProps = ({  loading, error}) => {
+    return {  loading, error };
   };
   
   const mapDispatchToProps = (dispatch, { chatService }) => {
